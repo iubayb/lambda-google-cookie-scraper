@@ -1,0 +1,41 @@
+{
+    "name": "lemn",
+    "version": "1.0.0",
+    "description": "Serverless puppeteer",
+    "main": "serverless.ts",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "engines": {
+        "node": ">=20.10.0"
+    },
+    "dependencies": {
+        "@aws-sdk/client-dynamodb": "^3.489.0",
+        "@aws-sdk/lib-dynamodb": "^3.489.0",
+        "@middy/core": "^5.2.3",
+        "@middy/http-json-body-parser": "^5.2.3",
+        "@sparticuz/chromium-min": "^119.0.2",
+        "puppeteer": "npm:puppeteer-core@^21.7.0",
+        "puppeteer-extra": "^3.3.6",
+        "puppeteer-extra-plugin-recaptcha": "^3.6.8",
+        "puppeteer-extra-plugin-stealth": "^2.11.2"
+    },
+    "devDependencies": {
+        "@serverless/typescript": "^3.38.0",
+        "@types/aws-lambda": "^8.10.131",
+        "@types/node": "^20.11.0",
+        "esbuild": "^0.19.11",
+        "json-schema-to-ts": "^3.0.0",
+        "serverless": "^3.38.0",
+        "serverless-esbuild": "^1.50.1",
+        "serverless-offline": "^13.3.2",
+        "ts-node": "^10.9.2",
+        "tsconfig-paths": "^4.2.0",
+        "typescript": "^5.3.3"
+    },
+    "overrides": {
+        "clone-deep": "^4.0.1"
+    },
+    "author": "Ayoub Rahmani",
+    "license": "MIT"
+}
