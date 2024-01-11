@@ -12,7 +12,7 @@ This README provides an overview and setup instructions for two AWS Lambda funct
 - `api-gateway`: Custom library for API Gateway event handling.
 - `checkAndSolveRecaptcha`: Utility for handling reCAPTCHA during web scraping, requires `API_KEY_2CAPTCHA`. Obtain the API key from [2Captcha](https://2captcha.com/), and store it securely in AWS Secrets Manager.
 - `dynamoDb`: DynamoDB integration utilities.
-- `getSecret` : Get the secret value from AWS Secrets Manager given the key.
+- `getSecret` : function that gets the secret value from AWS Secrets Manager given the key.
 - `lambda`: Middleware for AWS Lambda functions.
 - `puppeteer`: Custom Puppeteer instance setup for headless browser operations.
 
