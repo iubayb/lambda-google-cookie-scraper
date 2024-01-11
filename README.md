@@ -12,7 +12,7 @@ This README provides an overview and setup instructions for two AWS Lambda funct
 - `api-gateway`: Custom library for API Gateway event handling.
 - `checkAndSolveRecaptcha`: Utility for handling reCAPTCHA during web scraping, requires `API_KEY_2CAPTCHA`. Obtain the API key from [2Captcha](https://2captcha.com/), and store it securely in AWS Secrets Manager.
 - `dynamoDb`: DynamoDB integration utilities.
-- `getSecret` : function that gets the secret value from AWS Secrets Manager given the key.
+- `getSecret` : Function that gets the secret value from AWS Secrets Manager given the key.
 - `lambda`: Middleware for AWS Lambda functions.
 - `puppeteer`: Custom Puppeteer instance setup for headless browser operations.
 
@@ -38,4 +38,4 @@ This README provides an overview and setup instructions for two AWS Lambda funct
 
 ## Deployment
 
-Deploy these functions to AWS Lambda and expose them via API Gateway. Ensure that the IAM role associated with the Lambda functions has the necessary permissions to access DynamoDB, AmazonAPIGateway, AWSCloudFormation, AWSLambda, CloudWatchLogs, IAM, SecretsManager.
+Deploy these functions to AWS Lambda and expose them via API Gateway. Ensure that the user has the necessary permissions to access DynamoDB, AmazonAPIGateway, AWSCloudFormation, AWSLambda, CloudWatchLogs, IAM, and SecretsManager.
