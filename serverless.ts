@@ -12,6 +12,7 @@ const serverlessConfiguration: AWS = {
   ],
   provider: {
     name: 'aws',
+    region: 'eu-central-1',
     runtime: 'nodejs20.x',
     apiGateway: {
       minimumCompressionSize: 1024,
@@ -19,30 +20,33 @@ const serverlessConfiguration: AWS = {
     },
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
-      AWS_REGION: 'eu-central-1',
       NODE_OPTIONS: '--enable-source-maps --stack-trace-limit=1000',
       COOKIES_TABLE: 'CookiesTable',
       SEARCH_RESULTS_TABLE: 'SearchResultsTable',
     },
-    iamRoleStatements: [
-      {
-        Effect: 'Allow',
-        Action: [
-          'dynamodb:PutItem',
-          'dynamodb:GetItem',
-          'dynamodb:DeleteItem',
-          'dynamodb:UpdateItem',
-          'dynamodb:Scan',
-          'dynamodb:Query',
-          'dynamodb:DescribeTable',
-        ],
-        Resource: [
+    iam: {
+      role: {
+        statements: [
           {
-            'Fn::GetAtt': ['CookiesTable', 'Arn'],
+            Effect: 'Allow',
+            Action: [
+              'dynamodb:PutItem',
+              'dynamodb:GetItem',
+              'dynamodb:DeleteItem',
+              'dynamodb:UpdateItem',
+              'dynamodb:Scan',
+              'dynamodb:Query',
+              'dynamodb:DescribeTable',
+            ],
+            Resource: [
+              {
+                'Fn::GetAtt': ['CookiesTable', 'Arn'],
+              },
+            ],
           },
         ],
       },
-    ],
+    },
   },
   functions: { retrieveCookies, scrapeGoogleSearch },
   package: {
@@ -58,14 +62,10 @@ const serverlessConfiguration: AWS = {
             {
               AttributeName: 'username',
               AttributeType: 'S'
-            },
-            {
-              AttributeName: 'expiry',
-              AttributeType: 'N'
             }
           ],
           TimeToLiveSpecification: {
-            AttributeName: 'expiry', 
+            AttributeName: 'expiry',
             Enabled: true
           },
           KeySchema: [
