@@ -112,7 +112,6 @@ const serverlessConfiguration: AWS = {
       target: 'node20',
       define: { 'require.resolve': undefined },
       platform: 'node',
-      // concurrency: 10,
     },
   },
 };
