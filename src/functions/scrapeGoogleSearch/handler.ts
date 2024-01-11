@@ -4,6 +4,7 @@ import { middyfy } from '@libs/lambda';
 import schema from './schema';
 import puppeteerInstance from '@libs/puppeteer';
 import dynamoDb from '@libs/dynamoDb';
+import recaptcha from '@libs/checkAndSolveRecaptcha';
 
 const getCookiesFromDynamoDB = async (username: string) => {
   const params = {
@@ -45,14 +46,8 @@ const scrapeGoogleSearch: ValidatedEventAPIGatewayProxyEvent<typeof schema> = as
 
     console.log(`Performing Google search for query: ${event.body.query}`);
 
-    // debugging
-    // await page.goto(`https://www.google.com/`, { waitUntil: "domcontentloaded" });
-    // await page.type('input[name="q"]', event.body.query);
-    // await page.screenshot({ path: 'screenshot.png' });
+    await recaptcha(page).goto(`https://www.google.com/search?q=${encodeURIComponent(event.body.query)}`, { waitUntil: "domcontentloaded" });
 
-    await page.goto(`https://www.google.com/search?q=${encodeURIComponent(event.body.query)}`, { waitUntil: "domcontentloaded" });
-
-    
     const searchResults = await page.evaluate(() =>
       Array.from(document.querySelectorAll('#main > div > div > div > div.egMi0 > a')).map(e => ({
         title: (e as HTMLElement).innerText,
